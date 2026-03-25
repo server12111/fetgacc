@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python main.py)",
+      "Bash(taskkill /F /IM python.exe)",
+      "Bash(taskkill /F /IM python.exe /T)",
+      "Bash(wmic process:*)",
+      "Bash(taskkill //F //IM python.exe)",
+      "Bash(tasklist)",
+      "Bash(findstr /i python)"
+    ]
+  }
+}
