@@ -1757,13 +1757,15 @@ async def handle_callbacks(cb: types.CallbackQuery, state: FSMContext):
         if not TON_ADDRESS:
             return await cb.answer("❌ TON адрес не настроен. Обратитесь к администратору.", show_alert=True)
         comment = f"topup_{uid}"
+        ton_rate = db.get_setting("ton_usd_rate", "")
+        ton_amount_str = f"\n💎 TON: <code>{round(float(amount) / float(ton_rate), 4)}</code>" if ton_rate else ""
         await cb.message.edit_text(
             "💎 <b>Оплата через Tonkeeper</b>\n\n"
             f"📍 Адрес: <code>{TON_ADDRESS}</code>\n"
-            f"💰 Сумма: <code>{amount}</code>\n"
-            f"📝 Комментарий: <code>{comment}</code>\n\n"
-            "<i>Скопируйте адрес и отправьте указанную сумму. "
-            "После оплаты обратитесь к администратору для зачисления баланса.</i>",
+            f"💵 Сума: <code>${amount}</code>{ton_amount_str}\n"
+            f"📝 Коментар: <code>{comment}</code>\n\n"
+            "⚠️ <b>Обов'язково вкажіть коментар!</b>\n"
+            "<i>Баланс зарахується автоматично протягом ~1 хвилини після оплати.</i>",
             reply_markup=InlineKeyboardMarkup(inline_keyboard=[
                 [InlineKeyboardButton(text="⬅️ Назад", callback_data="popolnit"),
                  InlineKeyboardButton(text="🏠 Меню", callback_data="menu")]

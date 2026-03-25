@@ -83,6 +83,18 @@ class ShopSection(BaseModel):
         table_name = 'shop_sections'
 
 
+class TonDeposit(BaseModel):
+    """Оброблені TON транзакції — щоб не зарахувати двічі"""
+    tx_hash = CharField(primary_key=True)
+    uid = BigIntegerField()
+    amount_ton = FloatField()
+    amount_usd = FloatField()
+    credited_at = CharField()
+
+    class Meta:
+        table_name = 'ton_deposits'
+
+
 class BotSettings(BaseModel):
     """Налаштування бота, що зберігаються між перезапусками"""
     key = CharField(primary_key=True)
@@ -104,7 +116,7 @@ def set_setting(key: str, value) -> None:
 def initialize_db():
     """Создает таблицы если их нет"""
     db.connect(reuse_if_open=True)
-    db.create_tables([User, AccountsShop, Accounts, LztTransaction, PendingPurchase, BotSettings, ShopSection], safe=True)
+    db.create_tables([User, AccountsShop, Accounts, LztTransaction, PendingPurchase, BotSettings, ShopSection, TonDeposit], safe=True)
     # Міграції: додаємо нові колонки якщо їх немає
     for sql in [
         "ALTER TABLE pending_purchases ADD COLUMN lzt_currency VARCHAR(10) DEFAULT 'RUB'",
