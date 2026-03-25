@@ -1,0 +1,9 @@
+.env
+shop.db
+bot_output.log
+__pycache__/
+*.pyc
+*.pyo
+*.session
+*.session-journal
+.claude/

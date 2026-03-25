@@ -1,36 +1,20 @@
-# === Конфигурация бота ===
+import os
+from dotenv import load_dotenv
 
-# Токен Telegram бота (получить у @BotFather)
-bot_token = "8657251827:AAFFRgiEf2PnRq85z1wDwofWG8PONd2IgQY"
+load_dotenv()
 
-# Telegram API credentials (получить на https://my.telegram.org)
-api_id = 15539437
-api_hash = "52743d5c9d31a4c766a53e27af032e98"
+bot_token = os.getenv("BOT_TOKEN", "")
+api_id = int(os.getenv("API_ID", "0"))
+api_hash = os.getenv("API_HASH", "")
+crypto_bot_token = os.getenv("CRYPTO_BOT_TOKEN", "")
 
-# CryptoBot API токен (получить у @CryptoBot -> Crypto Pay)
-crypto_bot_token = "518009:AAh3cZNuJp1H5k58ogYwxKU2NwZ2CbjqibQ"
-
-# ID владельцев бота (могут добавлять аккаунты, управлять балансами)
-OWNERS = [7145919720]  # замените на свой Telegram ID
-
-# Список спонсоров — каналы/группы, на которые будут подписываться добавляемые аккаунты
-# Можно использовать username (@channel) или ссылку (https://t.me/channel)
-# Управляйте через команды /add_sponsor, /remove_sponsor, /sponsors
+OWNERS = [int(x) for x in os.getenv("OWNERS", "").split(",") if x.strip()]
 SPONSORS = []
 
-# === LZT Market ===
-# Токен API — отримати на https://lzt.market/account/api (розділ "Токени")
-LZT_TOKEN = ""
+LZT_TOKEN = os.getenv("LZT_TOKEN", "")
+LZT_MARKUP = float(os.getenv("LZT_MARKUP", "1.5"))
+LZT_MIN_PRICE = float(os.getenv("LZT_MIN_PRICE", "0.5"))
+LZT_MAX_PRICE = float(os.getenv("LZT_MAX_PRICE", "5.0"))
+LZT_PAGE_SIZE = int(os.getenv("LZT_PAGE_SIZE", "10"))
 
-# Множник ціни для накрутки (1.5 = +50%, 2.0 = +100% і т.д.)
-LZT_MARKUP = 1.5
-
-# Ліміти ціни при пошуку акаунтів на LZT ($)
-LZT_MIN_PRICE = 0.5
-LZT_MAX_PRICE = 5.0
-
-# Кількість акаунтів на сторінці в LZT-магазині
-LZT_PAGE_SIZE = 10
-
-# TON адреса гаманця для прямих платежів через Tonkeeper
-TON_ADDRESS = ""  # вкажіть вашу TON-адресу тут
+TON_ADDRESS = os.getenv("TON_ADDRESS", "")
