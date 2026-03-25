@@ -1,0 +1,7 @@
+aiohttp==3.11.11
+python-dotenv
+telethon==1.38.1
+peewee==3.17.8
+phonenumbers==8.13.51
+pycountry==24.6.1
+opentele
